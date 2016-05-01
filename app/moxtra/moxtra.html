@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		html, body {
+			margin: 0 auto;
+			height: 100%;
+			width: 100%;
+		}
+
+		iframe, div {
+			display: inline-block;
+		}
+
+		#chatroomPane {
+			background-color: #EEE;
+			width: 20%;
+			height: 100%;
+			float: left;
+		}
+
+		#chatboxContainer {
+			width: 80%;
+			height: 100%;
+			float: right;
+		}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://www.moxtra.com/api/js/moxtra-latest.js" id="moxtrajs"></script>
+		<script type="text/javascript">
+			//todo: dont make this so static
+			Moxtra.init({mode: "sandbox", client_id: "andrew", access_token: "rLEzMgAAAVRrjBntAACowFV4Y2M3MU9lSlBISHdKcWdEOUFRVFI5IAAAAANUalBCcFVrMnFISklIU094bU5JOW9CMW1EX3QyY0J6NmQw"});
+			var options = {
+		    iframe: true,
+		    tagid4iframe: "chatboxContainer",
+		    iframewidth: "100%",
+		    iframeheight: "100%",
+		    autostart_meet: false,
+		    autostart_note: false,
+		    start_chat: function(event) {
+		    	//todo: grab and override file upload button
+		    }
+		};
+		Moxtra.chatView(options);
+		</script>
+		<iframe id="chatroomPane"></iframe>
+		<div id="chatboxContainer"></div>
+	</body>
+</html>
