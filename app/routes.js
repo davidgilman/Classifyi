@@ -54,15 +54,17 @@ module.exports = function(app, passport) {
           path: '/oauth/token?client_secret=rdLIYJ0lydA&client_id=mD_t2cBz6d0&grant_type=http://www.moxtra.com/auth_uniqueid&uniqueid=' + req.user._id + '&timestamp=' + String((new Date()).getTime()),
           method: 'POST'
         };
-var globalAccessToken;
+        
+    var globalAccessToken;
 
-var req = https.request(options, function (res) {
-  if (res.statusCode != 200) console.log("ERROR! CONNECTION BAD.");
-  res.on('data', function (d) {
-    globalAccessToken = JSON.parse(d).access_token;
-    console.log(globalAccessToken);
-  });
-});
+    var req = https.request(options, function (res) {
+      if (res.statusCode != 200) console.log("ERROR! CONNECTION BAD.");
+      res.on('data', function (d) {
+        globalAccessToken = JSON.parse(d).access_token;
+        console.log(globalAccessToken);
+      });
+    });
+    req.end();
         res.render('profile', {
             user : req.user, // get the user out of session and pass to template
             token: globalAccessToken
