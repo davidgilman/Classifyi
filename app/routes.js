@@ -46,8 +46,26 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
+        const https = require('https');
+
+        var options = {
+          hostname: 'apisandbox.moxtra.com',
+          port: 443,
+          path: '/oauth/token?client_secret=rdLIYJ0lydA&client_id=mD_t2cBz6d0&grant_type=http://www.moxtra.com/auth_uniqueid&uniqueid=' + req.user._id + '&timestamp=' + String((new Date()).getTime()),
+          method: 'POST'
+        };
+var globalAccessToken;
+
+var req = https.request(options, function (res) {
+  if (res.statusCode != 200) console.log("ERROR! CONNECTION BAD.");
+  res.on('data', function (d) {
+    globalAccessToken = JSON.parse(d).access_token;
+    console.log(globalAccessToken);
+  });
+});
         res.render('profile', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user, // get the user out of session and pass to template
+            token: globalAccessToken
         });
     });
 
