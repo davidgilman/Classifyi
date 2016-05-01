@@ -29,7 +29,17 @@
                         <strong>password</strong>: {{ user.local.password }}<br>
                         <strong>token</strong>: {{ token }}
                     </p>
-
+                <p id="status">Image status</p>
+                <div id="imageform">
+                <form method="post" enctype="multipart/form-data" action="/">
+                  <p>
+                     <input type="file" name="upl" class="btn btn-default"/>
+                    </p>
+                <p>
+                <input type="submit" class="btn btn-default"/>
+                </p>
+             </form>
+            </div>
             </div>
         </div>
         <div class="col-sm-8" id="roomContainer">
@@ -67,4 +77,30 @@
 
 </div>
 </body>
+<script>
+    var ajaxFileUpload = function (data) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "", true);
+    xhr.addEventListener("load", function (e) {
+        // file upload is complete
+        console.log(xhr.responseText);    document.getElementById("status").innerHTML = xhr.responseText;
+    });
+    xhr.send(data);
+
+};
+var form = document.querySelector("form");
+
+form.addEventListener("submit", function (e) {
+    var fdata = new FormData(this);
+
+    // Optional. Append custom data.
+    fdata.append('user_city', 'Los Angeles');
+
+    ajaxFileUpload(fdata);
+
+    // Prevents the standard submit event
+    e.preventDefault();
+    return false;
+}, false);
+</script>
 </html>

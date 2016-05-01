@@ -14,6 +14,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+var multer   = require('multer');
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage })
+
 //get the db going on
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
@@ -37,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-require('./app/routes.js')(app, passport); 
+require('./app/routes.js')(app, passport, multer); 
 
 app.listen(port);
 console.log('We are live on port ' + port);
