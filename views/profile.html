@@ -19,7 +19,7 @@
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
 
@@ -30,6 +30,36 @@
                     </p>
 
             </div>
+        </div>
+        <div class="col-sm-8" id="roomContainer">
+            <script type="text/javascript" src="https://www.moxtra.com/api/js/moxtra-latest.js" id="moxtrajs"></script>
+            <script type="text/javascript">
+            //todo: dont make this so static
+            Moxtra.init({mode: "sandbox", client_id: "mD_t2cBz6d0", access_token: "rLEzMgAAAVRrjBntAACowFV4Y2M3MU9lSlBISHdKcWdEOUFRVFI5IAAAAANUalBCcFVrMnFISklIU094bU5JOW9CMW1EX3QyY0J6NmQw"});
+            var options = {
+            iframe: true,
+            tagid4iframe: "roomContainer",
+            iframewidth: "100%",
+            iframeheight: "300px",
+            invite_members: false,
+            autostart_meet: true,
+            autostart_note: false,
+                "show_dialogs": { "share": false },
+            start_chat: function(event) {
+                //todo: grab and override file upload button
+            },
+            publish_feed: function(event) {
+                alert(event.message);
+            },
+            share: function(event) {
+                alert("Share event");
+            },
+            add_page: function(event) {
+                alert("Page added.")
+            }
+        };
+        Moxtra.chatView(options);
+        </script>
         </div>
 
     </div>
