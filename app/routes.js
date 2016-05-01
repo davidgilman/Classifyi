@@ -57,18 +57,20 @@ module.exports = function(app, passport) {
         
     var globalAccessToken;
 
-    var req = https.request(options, function (res) {
+    var req2 = https.request(options, function (res2) {
       if (res.statusCode != 200) console.log("ERROR! CONNECTION BAD.");
-      res.on('data', function (d) {
+      res2.on('data', function (d) {
         globalAccessToken = JSON.parse(d).access_token;
         console.log(globalAccessToken);
-      });
-    });
-    req.end();
         res.render('profile', {
             user : req.user, // get the user out of session and pass to template
             token: globalAccessToken
         });
+      });
+    });
+    req2.end();
+
+
     });
 
     // =====================================
