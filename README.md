@@ -1,3 +1,3 @@
-![](http://i.imgur.com/R8Q0NF1.gif)
+Built at LA Hacks 2016.
 
-I WANT TO WIN
+I did design and helped work with Moxtra SDK. - David
